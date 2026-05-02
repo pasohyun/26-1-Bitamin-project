@@ -11,7 +11,6 @@ A2C + PPO 앙상블 비율 실험 노트북 빌더
 import json
 
 OUTPUT_NB = "A2C_PPO_Ensemble_Experiment.ipynb"
-LEGACY_OUTPUT_NB = "Ensemble_Comparison.ipynb"
 
 cells = []
 
@@ -966,10 +965,9 @@ nb = {
     "cells": cells,
 }
 
-for path in [OUTPUT_NB, LEGACY_OUTPUT_NB]:
+for path in [OUTPUT_NB]:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(nb, f, ensure_ascii=False, indent=1)
 
 print(f"노트북 생성 완료: {OUTPUT_NB}")
-print(f"호환용 파일도 갱신 완료: {LEGACY_OUTPUT_NB}")
 print(f"총 셀 수: {len(cells)}")
