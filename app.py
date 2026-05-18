@@ -28,19 +28,8 @@ STUDIO_IMAGE_CANDIDATES = [
 # 하트시그널 감성 — 세련된 거실/패널룸 분위기
 STUDIO_IMAGE_FALLBACK = "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85"
 
-# ETF 출연진 프로필 사진 (Unsplash — 성별 중립, 분위기 중심)
-ASSET_PHOTOS = {
-    # SPY 직진남 — 자신감 넘치는 청년 (밝은 미소, 적극적)
-    "SPY": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80",
-    # TLT 돈많은 연하남 — 세련된 정장의 청년
-    "TLT": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80",
-    # SHV 무해한 집돌이 — 편안하고 따뜻한 캐주얼
-    "SHV": "https://images.unsplash.com/photo-1542909168-82c3e7fdbe5e?auto=format&fit=crop&w=400&q=80",
-    # GLD 신비주의 연상남 — 차분하고 신비로운 성숙한 남성
-    "GLD": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=400&q=80",
-    # DBC 핫한 자유영혼 — 활동적이고 자유로운 분위기
-    "DBC": "https://images.unsplash.com/photo-1504593811423-6dd665756598?auto=format&fit=crop&w=400&q=80",
-}
+# ETF 출연진 프로필 사진 — 이모지 플레이스홀더 사용 (저작권 문제로 사진 미사용)
+ASSET_PHOTOS: dict[str, str] = {}
 
 # 국면별 분위기 이미지
 REGIME_PHOTOS = {
@@ -473,12 +462,15 @@ st.markdown(
     }
     .cast-photo-placeholder {
         width: 100%;
-        height: 120px;
+        height: 130px;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        font-size: 40px;
-        background: var(--panel-strong);
+        font-size: 52px;
+        background: linear-gradient(160deg, rgba(232,66,110,.10), rgba(232,66,110,.04));
+        border-bottom: 1px solid var(--line-soft);
+        gap: 4px;
     }
     .cast-body { padding: 11px 12px 13px; }
     .cast-ticker {
