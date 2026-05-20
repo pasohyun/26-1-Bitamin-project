@@ -1,0 +1,16 @@
+# pip install -r requirements.txt  (또는 conda environment.yml 사용)
+numpy>=1.26
+pandas>=2.0,<3
+scipy
+scikit-learn
+matplotlib
+jupyterlab
+ipykernel
+requests
+yfinance>=0.2.40
+hmmlearn
+pandas-datareader>=0.10.0
+gymnasium>=0.29
+stable-baselines3>=2.3
+plotly>=5.22
+streamlit>=1.50

@@ -1,0 +1,25 @@
+# BITAmin 금융시계열 — conda 환경
+# 생성: conda env create -f environment.yml
+# 활성화: conda activate bitamin-quant
+name: bitamin-quant
+channels:
+  - conda-forge
+dependencies:
+  - python=3.11
+  - pip
+  - numpy
+  - pandas>=2.0,<3
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - jupyterlab
+  - ipykernel
+  - requests
+  - yfinance
+  - hmmlearn
+  - pandas-datareader
+  - plotly
+  - streamlit>=1.50
+  - pip:
+      - gymnasium>=0.29
+      - stable-baselines3>=2.3
