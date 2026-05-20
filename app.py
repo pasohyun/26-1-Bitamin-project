@@ -19,27 +19,19 @@ HORIZON_DAYS = 21
 SIGNAL_GEM_VALUE = 500_000
 
 # ── 이미지 설정 ────────────────────────────────────────────────────────────────
-# 로컬 파일이 있으면 우선 사용, 없으면 Unsplash 고화질 URL 사용
+# 로컬 파일이 있으면 우선 사용, 없으면 이미지 없이 렌더링
 STUDIO_IMAGE_CANDIDATES = [
     BASE_DIR / "assets" / "signal_house.jpg",
     BASE_DIR / "assets" / "signal_house.png",
     BASE_DIR / "assets" / "signal_house.webp",
 ]
-# 하트시그널 감성 — 세련된 거실/패널룸 분위기
-STUDIO_IMAGE_FALLBACK = "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1200&q=85"
+STUDIO_IMAGE_FALLBACK = ""
 
 # ETF 출연진 프로필 사진 — 이모지 플레이스홀더 사용 (저작권 문제로 사진 미사용)
 ASSET_PHOTOS: dict[str, str] = {}
 
-# 국면별 분위기 이미지
-REGIME_PHOTOS = {
-    1: "https://images.unsplash.com/photo-1504703395950-b89145a5425b?auto=format&fit=crop&w=800&q=80",
-    2: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80",
-    3: "https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80",
-    4: "https://images.unsplash.com/photo-1499343162891-ad3ef3a53e57?auto=format&fit=crop&w=800&q=80",
-    5: "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?auto=format&fit=crop&w=800&q=80",
-    6: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80",
-}
+# 국면별 분위기 이미지 (로컬 파일만 사용)
+REGIME_PHOTOS: dict[int, str] = {}
 
 ASSETS = ["SPY", "TLT", "SHV", "GLD", "DBC"]
 
@@ -173,8 +165,6 @@ st.set_page_config(page_title="마켓시그널 💘📈", layout="wide", page_ic
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Pretendard:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
-
     :root {
         --bg-start: #fff5f7;
         --bg-mid: #fef0f4;
@@ -1593,9 +1583,13 @@ def render_game_guide():
         for level, regime in REGIMES.items():
             photo = REGIME_PHOTOS.get(level, STUDIO_IMAGE_FALLBACK)
             ep_alt = regime["episode"]
+            if photo:
+                photo_html = f'<img class="regime-img" src="{photo}" alt="{ep_alt}">'
+            else:
+                photo_html = '<div class="cast-photo-placeholder" style="height:180px">📺</div>'
             regime_cards.append(
                 f'<div class="regime-card">'
-                f'<img class="regime-img" src="{photo}" alt="{ep_alt}">'
+                f'{photo_html}'
                 f'<div class="regime-body">'
                 f'<div class="regime-ep-badge" style="background:{regime["badge_color"]}">EP.{level:02d} · {regime["finance"]}</div>'
                 f'<div class="regime-name">{regime["episode"]}</div>'

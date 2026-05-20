@@ -8,7 +8,9 @@ with open(file_path, 'r', encoding='utf-8') as f:
 # Cell 4 (index 3) is where the data preparation logic is.
 new_code = '''import os
 
-FRED_API_KEY = "9c3f2227440e6d8c815f7996a4d253b5" # <- 입력 필요 (추후 재수집 시)
+FRED_API_KEY = os.getenv("FRED_API_KEY", "")
+if not FRED_API_KEY:
+    raise ValueError("FRED_API_KEY environment variable is required.")
 download_start = '2009-01-01'
 actual_start_date = '2010-01-01'
 end_date = '2026-04-02'

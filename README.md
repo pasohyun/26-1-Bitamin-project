@@ -177,7 +177,7 @@ python final_hmm_rf_proxy_pipeline.py --cache cached_raw_data.csv --outdir final
 python ppo_team_reward_fixed.py
 ```
 
-> `ppo_team_reward_fixed.py` 내부 `FRED_API_KEY` 값을 본인 키로 교체해야 합니다.
+> 실행 전 `FRED_API_KEY` 환경변수를 설정해야 합니다.
 
 ### 4) 앙상블 재평가
 
@@ -195,9 +195,9 @@ streamlit run app.py
 
 ## 참고/주의
 
-1. 일부 노트북과 유틸 스크립트(`update_ipynb.py`)에 FRED API 키가 하드코딩되어 있으므로, 공개 저장소 운영 시 키 분리(.env/환경변수) 권장.
+1. 노트북/스크립트는 FRED API 키를 하드코딩하지 않고 `FRED_API_KEY` 환경변수를 사용합니다.
 2. `build_ensemble_compare_nb.py`는 노트북 본문을 재생성하므로, 수동 수정본이 있으면 백업 후 실행 권장.
-3. `app.py`는 로컬 이미지가 없을 때 외부 이미지 URL(Unsplash)을 fallback으로 사용합니다.
+3. `app.py`는 외부 이미지 URL을 사용하지 않으며, 로컬 이미지가 없으면 이미지 없이 렌더링합니다.
 
 ---
 

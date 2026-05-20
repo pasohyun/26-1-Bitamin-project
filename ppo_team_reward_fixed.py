@@ -44,6 +44,7 @@ pip install yfinance hmmlearn stable-baselines3[extra] gymnasium scikit-learn ma
 import warnings
 warnings.filterwarnings("ignore")
 
+import os
 import numpy as np
 import pandas as pd
 import requests
@@ -60,7 +61,7 @@ from stable_baselines3.common.vec_env import DummyVecEnv
 # ============================================================
 # 0. Global settings
 # ============================================================
-FRED_API_KEY = "PUT_YOUR_FRED_API_KEY_HERE"   # 팀원이 본인 FRED API key로 교체
+FRED_API_KEY = os.getenv("FRED_API_KEY", "")
 DOWNLOAD_START = "2005-01-01"
 START_DATE = "2006-01-01"
 END_DATE = "2026-04-02"
@@ -206,6 +207,8 @@ def build_dataset() -> pd.DataFrame:
     df_macro = df_macro.ffill().bfill()
 
     print("[2/4] Downloading FRED data...")
+    if not FRED_API_KEY:
+        raise ValueError("FRED_API_KEY environment variable is required to download FRED data.")
     fred_map = {
         "DGS10": "US10Y",
         "ICSA": "Jobless_Claims",
